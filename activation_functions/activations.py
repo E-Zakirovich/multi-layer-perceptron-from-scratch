@@ -48,4 +48,10 @@ class Activations:
         return dAdx
 
     def softmax(self, Z : np.ndarray) -> np.ndarray:
-        ...
+        Z = Z - np.max(Z, axis=-1, keepdims=True)
+        exp_z = np.exp(Z)
+        return exp_z / np.sum(exp_z, axis=-1, keepdims=True)
+
+    def softmax_derivative(self, Z):
+        s = self.softmax(Z)
+        return np.diag(s) - np.outer(s, s)
