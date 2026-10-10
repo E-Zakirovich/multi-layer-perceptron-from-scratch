@@ -16,10 +16,20 @@ class ActivationFunctions:
 
     # first activation function is ReLU, used in hidden layer
     def relu(self, Z : np.ndarray) -> np.ndarray:
-        act : np.ndarray = [np.max(i, 0) for i in Z]
+        act : np.ndarray = np.maximum(0, Z)
         return act
 
     # i need to find the derivative of ReLU also, I will use it in backpropagaton and optimization
     def relu_derivative(self, act : np.ndarray) -> np.ndarray:
-        dAdW : np.ndarray = [1 if i > 0 else 0 for i in act]
+        dAdW : np.ndarray = np.where(act > 0, 1, 0)
+        return dAdW
+
+    # i need a new neuron for output layer, and it is sigmoid. It is good for binary classification
+    def sigmoid(self, Z : float) -> float:
+        act : float = 1.0 / (1.0 + np.exp(-Z))
+        return act
+
+    # i need to find the derivative of sigmoid also, I will use it in backpropagaton and optimization
+    def sigmoid_derivative(self, act : float):
+        dAdW : float = act * (1.0 - act)
         return dAdW
