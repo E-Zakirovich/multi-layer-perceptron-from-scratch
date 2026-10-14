@@ -14,12 +14,16 @@ class Layer:
 
     def __init__(self, number_of_inputs : int, number_of_outputs : int, function : str) -> None:
         activations = Activations()
-        self.activation_function = getattr(activations, function)
-        self.act_grad = getattr(activations, f"{function}_derivative")
-        self.weights, self.bias = Initialize.He(number_of_inputs, number_of_outputs) if function == "relu" else Initialize.Xavier(number_of_inputs, number_of_outputs), np.zeros(number_of_outputs)
+        self.function = function
+        self.activation_function = getattr(activations, self.function)
+        self.activation_gradient = getattr(activations, f"{self.function}_derivative")
+        self.weights, self.bias = Initialize.He(number_of_inputs, number_of_outputs) if self.function == "relu" else Initialize.Xavier(number_of_inputs, number_of_outputs), np.zeros(number_of_outputs)
 
-    def forward(self, X):
-        ...
+    def forward(self, X : np.ndarray) -> np.ndarray:
+        self.X = X
+        Z = X @ self.weights + self.bias
+        self.act = self.activation_function(Z)
+        return self.act
 
     def backward(self):
         ...
