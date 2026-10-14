@@ -1,49 +1,20 @@
-from layer.layer import Layer
+"""
+mlp.py
+~~~~~~~
+
+this file is core of the project, it will receive the size of multilayer
+perceptron, hidden layer activation function, and output activation func
+tion. It will do forward propagation, backward propagation and train its
+elf.
+"""
+
 import numpy as np
-layers = [
-    Layer(2, 4, "relu"),
-    Layer(4, 3, "relu"),
-    Layer(3, 2, "softmax"),
-]
+from .layer.layer import Layer
 
-x = np.array(
-    [
-        [2.1, 5.2],
-        [6.1, 2.22],
-        [4.1, 3.22],
-    ]
-    
-)
+class MLP:
 
-y = np.array(
-    [
-        [0,1],
-        [1, 0],
-        [0, 1]
-    ]
-)
+    def __init__(self) -> None:
+        ...
 
-a = layers[0].forward(x)
-
-b = layers[1].forward(a)
-
-c = layers[2].forward(b)
-
-for i in a:
-    print(i)
-
-print("\n")
-
-for i in b:
-    print(i)
-
-print("\n")
-
-for i in c:
-    print(i)
-
-from loss.loss import Loss
-print("\n")
-
-wer = Loss().CathegoricalCrossEntropyLoss(c, y)
-print(wer)
+    def forward(self, X) -> None:
+        ...
