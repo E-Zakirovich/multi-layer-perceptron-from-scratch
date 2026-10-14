@@ -9,9 +9,11 @@ in order to help optimization and backpropagation algorithms,
 """
 
 import numpy as np
-import configs as get
 
 class Activations:
+
+    def __init__(self):
+        self.eulor = 2.71828182845904523536028747135266249775724709369995
 
     def relu(self, Z : np.ndarray) -> np.ndarray:
         return np.maximum(Z, 0)
@@ -20,7 +22,7 @@ class Activations:
         return (A > 0).astype(A.dtype)
 
     def sigmoid(self, Z : np.ndarray) -> np.ndarray:
-        return 1 / ( 1 + np.power(get.e, -1.0 * Z))
+        return 1 / ( 1 + np.power(self.eulor, -1.0 * Z))
 
     def sigmoid_derivative(self, A : np.ndarray) -> np.ndarray:
         return A * (1 - A)

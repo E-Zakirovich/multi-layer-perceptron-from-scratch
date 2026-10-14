@@ -6,8 +6,8 @@ This file will help me to make whole multilayer perceptron from scratch.
 You need only need to send the size of the layer and activation function 
 type.
 """
-from activations.activation import Activations
-from initializer.initialize import Initialize
+from ..activations.activation import Activations
+from ..initializer.initialize import Initialize
 import numpy as np
 
 class Layer:
