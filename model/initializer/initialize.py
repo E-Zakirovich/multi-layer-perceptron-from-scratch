@@ -10,5 +10,5 @@ import numpy as np
 
 class Initialize:
 
-    def He(self, number_of_inputs : np.ndarray, number_of_outputs : np.ndarray) -> np.ndarray:
+    def He(self, number_of_inputs : np.int_, number_of_outputs : np.int_) -> np.ndarray:
         return np.random.randn(number_of_inputs, number_of_outputs) * np.sqrt(2 / number_of_inputs)
