@@ -6,8 +6,8 @@ This file will help me to make whole multilayer perceptron from scratch.
 You need only need to send the size of the layer and activation function 
 type.
 """
-from ..activations.activation import Activations
-from ..initializer.initialize import Initialize
+from activations.activation import Activations
+from initializer.initialize import Initialize
 import numpy as np
 
 class Layer:
@@ -17,7 +17,8 @@ class Layer:
         self.function = function
         self.activation_function = getattr(activations, self.function)
         self.activation_gradient = getattr(activations, f"{self.function}_derivative")
-        self.weights, self.bias = Initialize.He(number_of_inputs, number_of_outputs) if self.function == "relu" else Initialize.Xavier(number_of_inputs, number_of_outputs), np.zeros(number_of_outputs)
+        self.weights= Initialize().He(number_of_inputs, number_of_outputs) if self.function == "relu" else Initialize().Xavier(number_of_inputs, number_of_outputs)
+        self.bias = np.zeros(number_of_outputs)
 
     def forward(self, X : np.ndarray) -> np.ndarray:
         self.X = X
