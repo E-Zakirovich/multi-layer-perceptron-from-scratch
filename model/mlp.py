@@ -10,11 +10,23 @@ elf.
 
 import numpy as np
 from .layer.layer import Layer
+from .loss.loss import Loss
 
 class MLP:
 
-    def __init__(self) -> None:
-        ...
+    def __init__(self, size : list[int], hidden : str = "relu", output : str = "softmax" if list[-1] != 1 else "sigmoid") -> None:
+        self.size = size
+        length = len(self.size) - 1
+        self.layers = [Layer(size[i], size[i + 1], output if i == length - 1 else hidden)
+                       for i in range(length)
+                    ]
 
-    def forward(self, X) -> None:
-        ...
+    def forward(self, X) -> np.ndarray:
+
+        for layer in self.layers:
+            X = layer.forward(X)
+
+        return X
+
+    def loss(self, A, Y):
+        return Loss().CathegoricalCrossEntropyLoss(A, Y)
