@@ -26,5 +26,9 @@ class Layer:
         self.act = self.activation_function(Z)
         return self.act
 
-    def backward(self):
-        ...
+    def backward(self, grad: np.ndarray, is_output: bool = False) -> np.ndarray:
+        B = self.X.shape[0]
+        dZ = grad if is_output else grad * self.activation_gradient(self.act)
+        self.dW = self.X.T @ dZ / B
+        self.db = dZ.sum(axis=0) / B
+        return dZ @ self.weights.T
