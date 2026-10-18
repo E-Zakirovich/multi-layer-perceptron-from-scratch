@@ -28,9 +28,6 @@ class MLP:
 
         return X
 
-    def loss(self, A, Y):
-        return Loss().CathegoricalCrossEntropyLoss(A, Y)
-
     def backward(self, grad: np.ndarray) -> None:
         for i, layer in enumerate(reversed(self.layers)):
             grad = layer.backward(grad, is_output = (i == 0))
